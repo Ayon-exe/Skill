@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+	<link rel="icon" type="image/x-icon" href="./images/logo.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
@@ -111,7 +112,7 @@
             position: absolute;
             top: 0;
             height: 100%;
-            transition: all 0.6s ease-in-out;
+            transition: all 0.25s ease-in-out;
         }
 
         .sign-in{
@@ -119,14 +120,14 @@
             width: 50%;
             opacity: 1;
             z-index: 5;
-            animation: move 0.6s;
+            animation: move 0.25s;
         }
 
         .container.active-signin .sign-in{
             transform: translateX(100%);
             opacity: 0;
             z-index: 1;
-            animation: move 0.6s;
+            animation: move 0.25s;
         }
 
         .sign-up{
@@ -134,14 +135,14 @@
             width: 50%;
             opacity: 1;
             z-index: 5;
-            animation: move 0.6s;
+            animation: move 0.25s;
         }
 
         .container.active-signup .sign-up{
             transform: translateX(-100%);
             opacity: 0;
             z-index: 1;
-            animation: move 0.6s;
+            animation: move 0.25s;
         }
 
         @keyframes move{
@@ -178,7 +179,7 @@
             width: 50%;
             height: 100%;
             overflow: hidden;
-            transition: all 0.6s ease-in-out;
+            transition: all 0.25s ease-in-out;
             border-radius: 150px 0 0 100px;
             z-index: 1000;
         }
@@ -198,7 +199,7 @@
             height: 100%;
             width: 200%;
             transform: translateX(0);
-            transition: all 0.6s ease-in-out;
+            transition: all 0.25s ease-in-out;
         }
 
         .container.active .toggle{
@@ -217,7 +218,7 @@
             text-align: center;
             top: 0;
             transform: translateX(0);
-            transition: all 0.6s ease-in-out;
+            transition: all 0.25s ease-in-out;
         }
 
         .toggle-left{
@@ -248,7 +249,7 @@
             transform: translateX(100%);
             opacity: 1;
             z-index: 5;
-            animation: move 0.6s;
+            animation: move 0.25s;
         }
 
         /* Registration OTP */
@@ -263,7 +264,7 @@
             transform: translateX(-100%);
             opacity: 1;
             z-index: 5;
-            animation: move 0.6s;
+            animation: move 0.25s;
         }
 
         /* Reset Password OTP */
@@ -278,7 +279,7 @@
             transform: translateX(-100%);
             opacity: 1;
             z-index: 5;
-            animation: move 0.6s;
+            animation: move 0.25s;
         }
 
         .reset-password {
@@ -292,7 +293,7 @@
             transform: translateX(100%);
             opacity: 1;
             z-index: 5;
-            animation: move 0.6s;
+            animation: move 0.25s;
         }
 
         /* Define styles for active-onetime-password state */
@@ -300,7 +301,7 @@
         transform: translateX(-100%);
         opacity: 1;
         z-index: 5;
-        animation: move 0.6s;
+        animation: move 0.25s;
         }
 
         .g_id_signin {
@@ -450,6 +451,7 @@
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
         const analytics = getAnalytics(app);
         const auth = getAuth();
 
@@ -464,12 +466,6 @@
         const submitResetOTPBtn = document.getElementById('submitOTP');
         const verifyBtn = document.getElementById('verify');
         const resendRegisterOTPBtn = document.getElementById('resendRegisterOTP');
-        
-
-        
-
-
-        const check = document.getElementById('check');
 
         registerBtn.addEventListener('click', () => {
             container.classList.add("active");
@@ -498,13 +494,13 @@
 
                 // Update last login date in Firebase under 'users/${userId}'
                 return update(ref(database, `users/${userId}`), {
-                lastLoginDate: new Date().toISOString()
+                //lastLoginDate: new Date().toISOString()
                 }).then(() => {
                 // Retrieve user data to determine role
                 return get(child(ref(database), `users/${userId}`));
                 }).then((snapshot) => {
                 if (snapshot.exists()) {
-                    window.location.href = "./SkillTracker.html";
+                    window.location.href = "./skilltracker.html";
                 } else {
                     alert("No user data found");
                 }
@@ -530,10 +526,6 @@
                     const userData = {
                         username: name,
                         email: register,
-                        profile: {
-                            firstName: fullName.split(' ')[0],
-                            lastName: fullName.split(' ')[1] || '',
-                        },
                         lastLoginDate: new Date().toISOString()
                     };
 
@@ -542,7 +534,7 @@
 
                 .then(() => {
                     alert('User Registered!');
-                    window.location.href = "./SkillTracker.html";
+                    window.location.href = "./skilltracker.html";
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
