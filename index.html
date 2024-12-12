@@ -499,7 +499,7 @@
                 return get(child(ref(database), `users/${userId}`));
                 }).then((snapshot) => {
                 if (snapshot.exists()) {
-                    window.location.href = "./SkillTracker.html";
+                    window.location.href = "./skilltracker.html";
                 } else {
                     alert("No user data found");
                 }
@@ -533,7 +533,7 @@
 
                 .then(() => {
                     alert('User Registered!');
-                    window.location.href = "./SkillTracker.html";
+                    window.location.href = "./skilltracker.html";
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
