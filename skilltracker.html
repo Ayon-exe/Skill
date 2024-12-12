@@ -94,13 +94,13 @@
                     const uid = user.uid;
 
                     // Fetch username from Firebase Database
-                    const userRef = ref(db, users/${uid}/username);
+                    const userRef = ref(db, `users/${uid}/username`);
                     get(userRef)
                         .then((snapshot) => {
                             if (snapshot.exists()) {
                                 const username = snapshot.val();
                                 const nameElement = document.getElementById("name");
-                                nameElement.textContent = Good Morning, ${username};
+                                nameElement.textContent = `Good Morning, ${username}`;
                             } else {
                                 console.error("No username data found!");
                             }
@@ -117,7 +117,7 @@
 
     <script>
         function myFunction() {
-            // Call tada defined in the module script
+            // Call `tada` defined in the module script
             import('./tada-module.js').then(({ tada }) => {
                 tada();
             }).catch((error) => {
