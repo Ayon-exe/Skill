@@ -46,7 +46,7 @@
         </div>
       </nav>
 
-      
+
     <div class="app-container">
         <div class="header">
             <h1 id="name">Good Morning </h1>
@@ -88,11 +88,12 @@
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
         const auth = getAuth();
-        const user = auth.currentUser;
-        const db = getDatabase();
-    
+        const database = getDatabase(app);
+        var uid = 0;
+        var greetRef;
+        var greetings;
+            
         onAuthStateChanged(auth, (user) => {
     if (user) {
         uid = user.uid;
@@ -100,7 +101,6 @@
         greeting();
     }
 });
-
 
 function greeting() {
     onValue(greetRef, (snapshot) => {
@@ -117,7 +117,6 @@ function greeting() {
         document.getElementById('name').innerText = greetings + ' ' + greetData;
     });
 }
-     
       </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
