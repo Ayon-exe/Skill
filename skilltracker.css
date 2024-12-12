@@ -9,15 +9,17 @@
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #11bfcb 0%, #015dfa 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     color: white;
     text-align: center;
-    padding: 0 20px;
 }
 
+/* Navbar styling */
+nav {
+    border-bottom-left-radius:25px ;
+    border-bottom-right-radius:25px ;
+}
+
+/* Skill Tracker Container */
 .app-container {
     background-color: #ffffff;
     padding: 30px 40px;
@@ -25,9 +27,13 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
+    margin: 0 auto; /* Center horizontally */
+    color: #333;
+    text-align: left;
     overflow: hidden;
 }
 
+/* Header styling */
 .header h1 {
     font-size: 32px;
     margin-bottom: 10px;
@@ -40,6 +46,7 @@ body {
     margin-bottom: 30px;
 }
 
+/* Form container styling */
 .form-container {
     display: flex;
     gap: 10px;
@@ -75,10 +82,11 @@ body {
     background-color: #6a11cb;
 }
 
-/* Skill List Styling */
+/* Skills List Styling */
 .skills-list ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .skill-item {
