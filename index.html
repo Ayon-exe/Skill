@@ -493,7 +493,7 @@
 
                 // Update last login date in Firebase under 'users/${userId}'
                 return update(ref(database, `users/${userId}`), {
-                lastLoginDate: new Date().toISOString()
+                //lastLoginDate: new Date().toISOString()
                 }).then(() => {
                 // Retrieve user data to determine role
                 return get(child(ref(database), `users/${userId}`));
