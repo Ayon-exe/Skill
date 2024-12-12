@@ -464,12 +464,6 @@
         const submitResetOTPBtn = document.getElementById('submitOTP');
         const verifyBtn = document.getElementById('verify');
         const resendRegisterOTPBtn = document.getElementById('resendRegisterOTP');
-        
-
-        
-
-
-        const check = document.getElementById('check');
 
         registerBtn.addEventListener('click', () => {
             container.classList.add("active");
@@ -530,10 +524,6 @@
                     const userData = {
                         username: name,
                         email: register,
-                        profile: {
-                            firstName: fullName.split(' ')[0],
-                            lastName: fullName.split(' ')[1] || '',
-                        },
                         lastLoginDate: new Date().toISOString()
                     };
 
