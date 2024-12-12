@@ -30,17 +30,21 @@ app.get("/", (req, res) => {
 
 // API endpoint to handle prompt
 app.post("/api/prompt", async (req, res) => {
-  const { prompt } = req.body;
+  const { skill } = req.body;
 
-  if (!prompt) {
-    return res.status(400).json({ error: "Prompt is required" });
+  if (!skill) {
+    return res.status(400).json({ error: "Skill name is required" });
   }
+
+  // Fixed prompt structure
+  const prompt = `Generate a detailed and hierarchical learning path for the skill '${skill}', organized as a tree structure with key concepts, subtopics, and actionable steps.`;
 
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+
+    // Directly retrieve the text response from the result
+    const text = result.response?.text || "No content generated"; // Ensure safety in case of an unexpected response structure
 
     res.json({ text });
   } catch (error) {
