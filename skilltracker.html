@@ -22,12 +22,22 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
     <div class="app-container">
-        <div class="header">
-            <h1 id="name">Go</h1>
-            <h1>Skill Tracker</h1>
+        <header class="text-center">
+            <h1 id="greeting">Good Morning</h1>
+            <h2>Skill Tracker</h2>
             <p>Track your progress on learning new skills!</p>
-        </div>
+        </header>
+
+        <section class="form-container">
+            <input type="text" id="skill-name" placeholder="Add a new skill..." required>
+            <button id="add-skill-btn">Add Skill</button>
+        </section>
+
+        <section class="skills-list">
+            <ul id="skill-list"></ul>
+        </section>
     </div>
 
     <script type="module">
