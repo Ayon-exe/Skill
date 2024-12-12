@@ -92,18 +92,33 @@
         const user = auth.currentUser;
 
         function onload() {
-            if (user !== null) {
-            // The user object has basic properties such as display name, email, etc.
-            const email = user.email;
-            var name=document.getElementById("name")
-            name.append(email)
+    const db = getDatabase();
+    const auth = getAuth();
+    const user = auth.currentUser;
 
-            // The user's ID, unique to the Firebase project. Do NOT use
-            // this value to authenticate with your backend server, if
-            // you have one. Use User.getToken() instead.
-            const uid = user.uid;
-            }
-        }
+    if (user !== null) {
+        const uid = user.uid;
+
+        // Fetch username from Firebase Database
+        const userRef = ref(db, `users/${uid}/username`);
+        get(userRef)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const username = snapshot.val();
+                    const nameElement = document.getElementById("name");
+                    nameElement.textContent = `Good Morning, ${username}`;
+                } else {
+                    console.error("No username data found!");
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching username:", error);
+            });
+    } else {
+        console.error("User is not logged in!");
+    }
+}
+
 
         
       </script>
