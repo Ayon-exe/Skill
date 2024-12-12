@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini Prompt</title>
+    <style>
+      form {
+        width: 50%;
+        margin: 40px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="text"] {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      input[type="submit"] {
+        width: 100%;
+        height: 40px;
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      #output {
+        margin: 40px auto;
+        width: 50%;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Gemini Prompt</h1>
+    <div id="output"></div>
+    <form id="prompt-form">
+      <label for="text-input">Enter your text:</label>
+      <input type="text" id="text-input" name="text-input" />
+      <input type="submit" value="Submit" />
+    </form>
+    <script>
+      document
+        .getElementById("prompt-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const userInput = document.getElementById("text-input").value;
+          const outputDiv = document.getElementById("output");
+
+          // Send user input to the backend
+          try {
+            const response = await fetch("http://localhost:3000/api/prompt", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ prompt: userInput }),
+            });
+
+            const data = await response.json();
+            if (data.text) {
+              outputDiv.textContent = data.text;
+            } else {
+              outputDiv.textContent = "Error generating response.";
+            }
+          } catch (error) {
+            outputDiv.textContent = "Error connecting to the backend.";
+            console.error(error);
+          }
+        });
+    </script>
+  </body>
+</html>
