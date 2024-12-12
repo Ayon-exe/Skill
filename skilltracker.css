@@ -66,6 +66,16 @@
     #skill-name:focus {
         border-color: #2575fc;
     }
+
+    #output {
+        flex-grow: 1;
+        padding: 12px;
+        font-size: 16px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
     
     #add-skill-btn {
         background-color: #2575fc;
