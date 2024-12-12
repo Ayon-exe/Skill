@@ -52,26 +52,25 @@
         const auth = getAuth();
 
         // Function to greet the user
-        function greetUser(uid) {
-            const userRef = ref(db, `users/${uid}/username`);
-            get(userRef)
-                .then((snapshot) => {
-                    if (snapshot.exists()) {
-                        const username = snapshot.val();
-                        document.getElementById('name').innerText = `Good Morning, ${username}`;
-                    } else {
-                        console.error("No username found for this user.");
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error fetching username:", error);
-                });
+        async function greetUser(uid) {
+            try {
+                const userRef = ref(db, `users/${uid}/username`);
+                const snapshot = await get(userRef);
+                if (snapshot.exists()) {
+                    const username = snapshot.val();
+                    document.getElementById('name').innerText = `Good Morning, ${username}`;
+                } else {
+                    console.error("No username found for this user.");
+                }
+            } catch (error) {
+                console.error("Error fetching username:", error);
+            }
         }
 
         // Check authentication state
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
-                greetUser(user.uid); // Pass the user's UID to fetch their name
+                await greetUser(user.uid); // Pass the user's UID to fetch their name
             } else {
                 console.log("No user is signed in.");
             }
